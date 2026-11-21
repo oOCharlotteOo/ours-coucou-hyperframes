@@ -8,6 +8,8 @@ on:
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
 
 jobs:
   render:
@@ -45,6 +47,49 @@ jobs:
           test -s renders/ours-coucou.mp4
           ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 renders/ours-coucou.mp4
 
+      - name: Prepare the video web page
+        run: |
+          mkdir -p public
+          cp renders/ours-coucou.mp4 public/ours-coucou.mp4
+          cat > public/index.html <<'HTML'
+          <!doctype html>
+          <html lang="fr">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <meta name="theme-color" content="#fff1f5">
+            <title>Ours coucou !</title>
+            <style>
+              * { box-sizing: border-box; }
+              body {
+                margin: 0; min-height: 100vh; display: grid; place-items: center;
+                padding: 24px; font-family: system-ui, sans-serif; text-align: center;
+                color: #493642; background: linear-gradient(145deg, #fff1f5, #e9f5ff);
+              }
+              main { width: min(100%, 720px); }
+              h1 { margin: 0 0 16px; font-size: clamp(2rem, 7vw, 3.5rem); }
+              video {
+                display: block; width: 100%; max-height: 75vh; margin: auto;
+                object-fit: contain; border-radius: 20px; background: #fff;
+                box-shadow: 0 12px 36px #49364222;
+              }
+              a { display: inline-block; margin-top: 18px; color: #8a4267; }
+            </style>
+          </head>
+          <body>
+            <main>
+              <h1>Coucou toi ! 🧸</h1>
+              <video controls playsinline preload="metadata">
+                <source src="ours-coucou.mp4" type="video/mp4">
+                Ton navigateur ne peut pas lire cette vidéo.
+              </video>
+              <p>Un petit coucou tout doux 💗</p>
+              <a href="ours-coucou.mp4" download>Télécharger la vidéo</a>
+            </main>
+          </body>
+          </html>
+          HTML
+
       - name: Upload MP4 as workflow artifact
         uses: actions/upload-artifact@v4
         with:
@@ -53,9 +98,26 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Upload website for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
       - name: Publish GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           files: renders/ours-coucou.mp4
           generate_release_notes: true
+
+  deploy:
+    if: github.ref == 'refs/heads/master'
+    needs: render
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
