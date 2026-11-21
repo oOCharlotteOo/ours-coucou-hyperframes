@@ -1,4 +1,5 @@
 name: Render and publish bear video
+# Manual trigger requested: start a fresh render and GitHub Pages deployment.
 
 on:
   push:
