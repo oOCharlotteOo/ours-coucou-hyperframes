@@ -38,20 +38,20 @@ jobs:
       - name: Check HyperFrames environment
         run: npx hyperframes doctor
 
-      - name: Render 5-second MP4
+      - name: Render 64-second explainer MP4
         run: |
           mkdir -p renders
-          npx hyperframes render --output renders/ours-coucou.mp4 --fps 30 --quality standard
+          npx hyperframes render --output renders/notre-aventure.mp4 --fps 30 --quality standard
 
       - name: Verify rendered video
         run: |
-          test -s renders/ours-coucou.mp4
-          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 renders/ours-coucou.mp4
+          test -s renders/notre-aventure.mp4
+          ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 renders/notre-aventure.mp4
 
       - name: Prepare the video web page
         run: |
           mkdir -p public
-          cp renders/ours-coucou.mp4 public/ours-coucou.mp4
+          cp renders/notre-aventure.mp4 public/notre-aventure.mp4
           cat > public/index.html <<'HTML'
           <!doctype html>
           <html lang="fr">
@@ -59,7 +59,7 @@ jobs:
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <meta name="theme-color" content="#fff1f5">
-            <title>Ours coucou !</title>
+            <title>Notre aventure — de l'idée à la vidéo</title>
             <style>
               * { box-sizing: border-box; }
               body {
@@ -79,13 +79,13 @@ jobs:
           </head>
           <body>
             <main>
-              <h1>Coucou toi ! 🧸</h1>
+              <h1>Notre aventure 🧸</h1>
               <video controls playsinline preload="metadata">
-                <source src="ours-coucou.mp4" type="video/mp4">
+                <source src="notre-aventure.mp4" type="video/mp4">
                 Ton navigateur ne peut pas lire cette vidéo.
               </video>
-              <p>Un petit coucou tout doux 💗</p>
-              <a href="ours-coucou.mp4" download>Télécharger la vidéo</a>
+              <p>De l'idée à la vidéo : notre histoire 💗</p>
+              <a href="notre-aventure.mp4" download>Télécharger la vidéo</a>
             </main>
           </body>
           </html>
@@ -94,8 +94,8 @@ jobs:
       - name: Upload MP4 as workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ours-coucou-video
-          path: renders/ours-coucou.mp4
+          name: notre-aventure-video
+          path: renders/notre-aventure.mp4
           if-no-files-found: error
           retention-days: 30
 
@@ -108,7 +108,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: renders/ours-coucou.mp4
+          files: renders/notre-aventure.mp4
           generate_release_notes: true
 
   deploy:
