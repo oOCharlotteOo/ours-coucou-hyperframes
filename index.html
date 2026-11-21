@@ -1,50 +1,33 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ours coucou — HyperFrames</title>
-  <style>
-    *{box-sizing:border-box} html,body{margin:0;width:100%;height:100%;overflow:hidden}
-    body{font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(160deg,#fff1d6,#f8c9b9 58%,#c8d9f5);color:#493b37}
-    .scene{width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden}
-    .sun{position:absolute;top:9%;right:12%;width:130px;height:130px;border-radius:50%;background:#ffd36b;box-shadow:0 0 70px #ffe39c;opacity:.9}
-    .title{z-index:2;text-align:center;font-size:clamp(42px,7vw,76px);font-weight:850;letter-spacing:-2px;margin:0 20px 12px;animation:pop .8s both}
-    .subtitle{z-index:2;font-size:clamp(20px,3vw,30px);text-align:center;margin:0 24px 35px;animation:fade 1s .3s both}
-    .bear{position:relative;width:300px;height:330px;animation:bob 2.2s ease-in-out infinite}
-    .body{position:absolute;width:205px;height:205px;left:48px;bottom:0;border-radius:48% 48% 42% 42%;background:#a96d45;box-shadow:inset -15px -10px #895537}
-    .head{position:absolute;width:235px;height:210px;left:33px;top:0;border-radius:48% 48% 46% 46%;background:#b97b50;z-index:2}
-    .ear{position:absolute;width:72px;height:72px;top:-12px;border-radius:50%;background:#a96d45;border:10px solid #b97b50}
-    .ear.left{left:20px}.ear.right{right:20px}
-    .muzzle{position:absolute;width:104px;height:70px;left:65px;top:112px;border-radius:50%;background:#f4d5b7}
-    .eye{position:absolute;top:88px;width:13px;height:17px;border-radius:50%;background:#382a27}.eye.left{left:68px}.eye.right{right:68px}
-    .nose{position:absolute;top:124px;left:105px;width:26px;height:18px;border-radius:50%;background:#49312d}
-    .smile{position:absolute;top:142px;left:105px;width:26px;height:14px;border-bottom:4px solid #75473b;border-radius:50%}
-    .arm{position:absolute;z-index:3;width:65px;height:125px;right:4px;top:145px;background:#b97b50;border-radius:40px;transform-origin:30px 25px;animation:wave .65s ease-in-out infinite alternate}
-    .paw{position:absolute;right:-8px;top:-17px;width:72px;height:65px;background:#b97b50;border-radius:50%}
-    .paw:before,.paw:after{content:"";position:absolute;top:-10px;width:23px;height:29px;border-radius:50%;background:#b97b50}
-    .paw:before{left:10px}.paw:after{right:10px}
-    .feet{position:absolute;bottom:-9px;left:65px;width:75px;height:42px;border-radius:50%;background:#895537;box-shadow:95px 0 #895537}
-    .caption{z-index:2;margin-top:35px;font-size:clamp(22px,3vw,32px);font-weight:700;animation:fade 1s .8s both}
-    @keyframes wave{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
-    @keyframes bob{0%,100%{translate:0 0}50%{translate:0 -12px}}
-    @keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
-    @keyframes fade{from{opacity:0;translate:0 12px}to{opacity:1;translate:0 0}}
-  </style>
-</head>
-<body>
-  <main class="scene">
-    <div class="sun"></div>
-    <h1 class="title">Coucou toi !</h1>
-    <p class="subtitle">J'avais envie de te saluer ☀️</p>
-    <div class="bear" role="img" aria-label="Un ours brun qui fait coucou">
-      <div class="ear left"></div><div class="ear right"></div>
-      <div class="body"></div><div class="head"></div>
-      <div class="eye left"></div><div class="eye right"></div>
-      <div class="muzzle"></div><div class="nose"></div><div class="smile"></div>
-      <div class="arm"><div class="paw"></div></div><div class="feet"></div>
-    </div>
-    <div class="caption">👋 Hello !</div>
-  </main>
-</body>
-</html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Notre petite aventure — de l'idée à la vidéo</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#493b37;background:#fff1e8}
+.stage{width:100vw;height:100vh;position:relative;overflow:hidden;background:linear-gradient(150deg,#fff1e8,#f6d6d1 55%,#d8e5f7)}
+.scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:9%;opacity:0;animation:show 64s linear both}
+.scene:nth-child(1){animation-delay:0s}.scene:nth-child(2){animation-delay:8s}.scene:nth-child(3){animation-delay:16s}.scene:nth-child(4){animation-delay:24s}.scene:nth-child(5){animation-delay:32s}.scene:nth-child(6){animation-delay:40s}.scene:nth-child(7){animation-delay:48s}.scene:nth-child(8){animation-delay:56s}
+@keyframes show{0%,2%{opacity:0;transform:translateY(24px)}5%,10%{opacity:1;transform:translateY(0)}12.5%,100%{opacity:0;transform:translateY(-18px)}}
+.kicker{font-size:clamp(18px,2.4vw,28px);letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#a66b69;margin-bottom:28px}
+h1{font-size:clamp(54px,9vw,104px);line-height:1.02;letter-spacing:-.05em;margin:0 0 28px}
+p{font-size:clamp(28px,4.3vw,48px);line-height:1.3;max-width:900px;margin:0}
+.small{font-size:clamp(21px,3vw,32px);margin-top:30px;color:#785f59}
+.emoji{font-size:clamp(110px,22vw,230px);line-height:1;margin:25px 0}
+.pill{display:inline-block;margin:12px;padding:14px 24px;border-radius:999px;background:#ffffffa8;font-size:clamp(20px,3vw,30px);font-weight:700}
+.timeline{display:flex;flex-direction:column;gap:20px;margin-top:34px;text-align:left;font-size:clamp(24px,3.5vw,38px)}
+.timeline span{background:#ffffffa8;border-radius:20px;padding:16px 24px}
+footer{position:absolute;bottom:3%;left:0;width:100%;text-align:center;font-size:18px;color:#876e68;z-index:2}
+</style></head>
+<body><main class="stage">
+<section class="scene"><div class="kicker">Une petite aventure numérique</div><h1>De « Coucou toi ! »<br>à une vraie vidéo 🧸</h1><div class="emoji">👋🐻</div><p>Retour sur ce que nous avons construit ensemble.</p></section>
+<section class="scene"><div class="kicker">Étape 1 · L'idée</div><div class="emoji">💡</div><h1>Un ours qui dit bonjour</h1><p>Nous sommes partis d'une idée toute simple : créer un petit personnage chaleureux, animé, au format vertical.</p></section>
+<section class="scene"><div class="kicker">Étape 2 · La création</div><div class="emoji">🎨🐻</div><h1>Donner vie à l'ours</h1><p>Nous avons construit la scène en HTML et CSS : couleurs douces, visage, oreilles, petits pieds et bras qui salue.</p><div class="small">Le résultat : « Coucou toi ! »</div></section>
+<section class="scene"><div class="kicker">Étape 3 · Le projet</div><div class="emoji">🧩</div><h1>Organiser les fichiers</h1><p>Nous avons préparé le projet HyperFrames, ses métadonnées, ses dépendances et les instructions pour générer la vidéo.</p><div class="small">1080 × 1920 · 30 images par seconde</div></section>
+<section class="scene"><div class="kicker">Étape 4 · L'automatisation</div><div class="emoji">⚙️</div><h1>GitHub Actions au travail</h1><p>À chaque mise à jour, GitHub peut installer les outils, lancer le rendu, vérifier le fichier MP4 et préparer sa publication.</p><div class="small">Une chaîne de fabrication reproductible.</div></section>
+<section class="scene"><div class="kicker">Étape 5 · Le contrôle</div><div class="emoji">🎬</div><h1>Fabriquer et vérifier</h1><p>Le rendu vidéo a bien été généré lors d'une exécution du workflow. Nous avons aussi prévu un contrôle du fichier avec FFmpeg.</p><div class="small">Le premier obstacle concernait la configuration de GitHub Pages, pas le rendu.</div></section>
+<section class="scene"><div class="kicker">Étape 6 · La publication</div><div class="emoji">🌐🚀</div><h1>Mettre la vidéo en ligne</h1><p>Nous avons ajouté une page web avec un lecteur vidéo et un lien de téléchargement, puis configuré le déploiement via GitHub Pages.</p><div class="small">Le déploiement final dépend de la réussite de l'exécution Actions.</div></section>
+<section class="scene"><div class="kicker">Et maintenant ?</div><div class="emoji">💗🐻</div><h1>Une idée, un projet,<br>une réalisation !</h1><p>Nous avons appris à créer, structurer, automatiser et préparer la mise en ligne d'une vidéo.</p><div class="small">Merci pour cette belle collaboration. À la prochaine aventure !</div></section>
+<footer>Notre aventure · création & automatisation vidéo</footer>
+</main></body></html>
